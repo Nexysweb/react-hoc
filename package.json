@@ -1,0 +1,41 @@
+{
+  "name": "whatsappanalyze",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@babel/core": "^7.5.5",
+    "@nexys/utils": "^1.2.4",
+    "@storybook/react": "^5.1.11",
+    "babel-loader": "^8.0.6",
+    "cleave.js": "^1.5.3",
+    "lessc": "^1.0.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1",
+    "recharts": "^1.6.2"
+  },
+  "scripts": {
+    "start": "start-storybook -p 6006",
+    "build": "build-storybook -s public"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^5.1.11",
+    "@storybook/addon-links": "^5.1.11",
+    "@storybook/react": "^5.1.11"
+  }
+}
