@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Cleave from 'cleave.js/react';
 
 import Utils from  '@nexys/utils';
 
@@ -107,8 +106,7 @@ const wrapComponent = () => WrappedComponent => class Hoc extends React.Componen
     const style = {textAlign: 'right'};
 
     return (
-      <div className="input-group my-input-group">
-        <Cleave
+      <WrappedComponent
           value={this.state.value}
           className={className}
           options={options}
@@ -117,9 +115,8 @@ const wrapComponent = () => WrappedComponent => class Hoc extends React.Componen
           placeholder={this.props.placeholder}
           disabled={this.state.disabled ? true : undefined}
           style={style}
-          />
-        <span className="input-group-addon">{this.state.suffix}</span>
-      </div>
+          suffix={this.state.suffix}
+      />
     );
   }
 }
