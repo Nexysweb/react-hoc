@@ -1,3 +1,3 @@
-import Hoc from './src/hoc/index';
+import Hoc from './dist/hoc/index';
 
 export default Hoc;
