@@ -22,8 +22,7 @@
     "build": "build-storybook -s public"
   },
   "files": [
-    "index.js",
-    "src"
+
   ],
   "eslintConfig": {
     "extends": "react-app"
