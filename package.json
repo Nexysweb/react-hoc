@@ -1,6 +1,6 @@
 {
   "name": "reacthoc",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.5.5",
@@ -21,9 +21,7 @@
     "start": "start-storybook -p 6006",
     "build": "build-storybook -s public"
   },
-  "files": [
-
-  ],
+  "files": [],
   "eslintConfig": {
     "extends": "react-app"
   },
