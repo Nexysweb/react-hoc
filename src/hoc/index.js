@@ -2,6 +2,7 @@ import MyBoolean from './boolean';
 import Checkbox from './checkbox';
 import MyDate from './date';
 import Input from './input';
+import Multiselect form './multiselect';
 import NumberInput from './number-input';
 import Panel from './panel';
 import Select from './select';
@@ -14,6 +15,7 @@ export default {
   Checkbox, 
   Date: MyDate, 
   Input, 
+  Multiselect,
   NumberInput, 
   Panel, 
   Select, 
