@@ -1,3 +1,3 @@
-const utils = require('@nexys/utils');
+ const utils = require('@nexys/utils');
 
 console.log(utils)
