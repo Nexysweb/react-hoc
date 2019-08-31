@@ -2,7 +2,7 @@ import MyBoolean from './boolean';
 import Checkbox from './checkbox';
 import MyDate from './date';
 import Input from './input';
-import Multiselect form './multiselect';
+import Multiselect from './multiselect';
 import NumberInput from './number-input';
 import Panel from './panel';
 import Select from './select';
