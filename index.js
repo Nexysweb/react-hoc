@@ -1,3 +1,3 @@
- const utils = require('@nexys/utils');
+import Hoc from './src/hoc/index';
 
-console.log(utils)
+export default Hoc;

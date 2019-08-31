@@ -2,10 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const wrapComponent = () => WrappedComponent => class Hoc extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   static propTypes = {
     title: PropTypes.string,
     /** Element that will be rendered in the panel head */
