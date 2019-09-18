@@ -1,6 +1,6 @@
 {
   "name": "@nexys/reactutils",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "dependencies": {},
   "scripts": {
     "start": "start-storybook -p 6006",
