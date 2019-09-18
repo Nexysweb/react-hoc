@@ -128,11 +128,14 @@ const wrapComponent = () => WrappedComponent => class Hoc extends React.Componen
     }
   }
 
+  /*
+    this triggers
+    Warning: Expected Hoc state to match memoized state before processing the update queue. This might either be because of a bug in React, or because a component reassigns its own `this.props`. Please file an issue.
   componentDidUpdate(nextProps) {
     if (nextProps.value !== this.props.value) {
       this.processProps(nextProps);
     }
-  }
+  }*/
 
   render() {
     const className = 'form-control';
