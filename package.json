@@ -1,6 +1,6 @@
 {
   "name": "@nexys/reactutils",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "dependencies": {
     "@nexys/utils": "^1.2.4"
   },
