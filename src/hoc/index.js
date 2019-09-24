@@ -11,6 +11,8 @@ import Textarea from './textarea';
 import Wrapper from './wrapper';
 import FormChange from './form-change';
 
+import List from '../components/list';
+
 export default {
   Boolean: MyBoolean, 
   Checkbox, 
@@ -23,5 +25,6 @@ export default {
   Select2, 
   Textarea, 
   Wrapper,
-  FormChange
+  FormChange,
+  List
 };
