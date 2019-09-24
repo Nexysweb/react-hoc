@@ -1,11 +1,11 @@
 import NexysUtil from '@nexys/utils';
 const { get } = NexysUtil.ds;
 
-const getAttribute = (attribute, a) => {
+export const getAttribute = (attribute, a) => {
   const ac = get(attribute, a);
 
   if (typeof ac === 'string') {
-    return toLocaleLowerCase(ac);
+    return ac.toLocaleLowerCase();
   }
 
   return ac;

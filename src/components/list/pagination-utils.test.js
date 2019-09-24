@@ -1,4 +1,4 @@
-import { getPagination, getNPage, getPageTiles } from './index'
+import { getPagination, getNPage, getPageTiles } from './pagination-utils'
 
 test('gepagination', () => {
 
