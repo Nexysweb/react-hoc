@@ -23,16 +23,20 @@ import Panel from '../components/panel';
 
 import List from '../components/list'
 
+const data = [
+  {name: 'Sheep', location: 'Europe'},
+  {name: 'Tiger', location: 'Asia'},
+  {name: 'Elephant', location: 'Africa'},
+  {name: 'Lion', location: 'Africa'},
+  {name: 'Cat', location: 'Europe'},
+  {name: 'Grizzly', location: 'America'},
+  {name: 'Antelope', location: 'Africa'}];
+
+const def = [{name: 'name'}, {name: 'location'}, {name: 'location'}, {name: 'location'}, {name: 'location'}, {name: 'location'}, {name: 'name'}]
+
 storiesOf('Components', module)
   .add('icon', () => <Icon name="home"/>)
-  .add('list', () => <List data={[
-    {name: 'Sheep', location: 'Europe'},
-    {name: 'Tiger', location: 'Asia'},
-    {name: 'Elephant', location: 'Africa'},
-    {name: 'Lion', location: 'Africa'},
-    {name: 'Cat', location: 'Europe'},
-    {name: 'Grizzly', location: 'America'},
-    {name: 'Antelope', location: 'Africa'}]} def={[{name: 'name'}, {name: 'location'}]} nPerPage="3"/>)
+  .add('list', () => <List data={data} def={def} nPerPage="3"/>)
 
 const options = [
   {id: 1, name: 'apple'},

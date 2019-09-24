@@ -46,14 +46,14 @@ export class OrderController extends React.Component {
 export class ListWrapper extends React.Component {
   render() {
     const { children} = this.props;
-    return <div>{children}</div>;
+    return <div className="table-responsive-sm">{children}</div>;
   }
 }
 
 export class ListContainer extends React.Component {
   render() {
     const { children} = this.props;
-    return <table className="table">{children}</table>;
+    return <table className="table table-striped table-bordered">{children}</table>;
   }
 }
 

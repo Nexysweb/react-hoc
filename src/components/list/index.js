@@ -86,10 +86,6 @@ export default class Table extends React.Component {
     });
   }
 
-  renderRecordInfo = (idx, nPerPage) => {
-
-  }
-
   render() {
     const {pagination, n} = this.state
     const { idx, nPerPage } = pagination;
