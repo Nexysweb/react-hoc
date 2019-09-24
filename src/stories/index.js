@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 
 // import { linkTo } from '@storybook/addon-links';
 
-import { Button } from '@storybook/react/demo';
+//import { Button } from '@storybook/react/demo';
 
 import Icon from '../components/icon'
 
@@ -21,8 +21,18 @@ import Textarea from '../form/textarea';
 import Wrapper from '../form/wrapper';
 import Panel from '../components/panel';
 
+import List from '../components/list'
+
 storiesOf('Components', module)
-  .add('icon', () => <Icon name="home"/>);
+  .add('icon', () => <Icon name="home"/>)
+  .add('list', () => <List data={[
+    {name: 'Sheep', location: 'Europe'},
+    {name: 'Tiger', location: 'Asia'},
+    {name: 'Elephant', location: 'Africa'},
+    {name: 'Lion', location: 'Africa'},
+    {name: 'Cat', location: 'Europe'},
+    {name: 'Grizzly', location: 'America'},
+    {name: 'Antelope', location: 'Africa'}]} def={[{name: 'name'}, {name: 'location'}]} nPerPage="3"/>)
 
 const options = [
   {id: 1, name: 'apple'},

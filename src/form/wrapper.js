@@ -4,7 +4,7 @@
 */
 import React from 'react';
 import Mandatory from '../components/mandatory.js';
-import Tooltip from '../components/tooltip.js';
+//import Tooltip from '../components/tooltip.js';
 
 import wrapComponent from '../hoc/wrapper';
 
@@ -32,7 +32,7 @@ class Wrapper extends React.Component {
     if (typeof this.props.info !== 'undefined') {
       info = (<span>
         &nbsp;
-        <Tooltip id={this.props.name} text={this.props.info}/>
+        {/*<Tooltip id={this.props.name} text={this.props.info}/>*/}
       </span>);
     }
 
@@ -51,10 +51,10 @@ class Wrapper extends React.Component {
       });
     }
 
-    let r = ''
+    // let r = ''
 
     if (this.props.errors && this.props.errors[attribute]) {
-      r += ' has-error';
+      // r += ' has-error';
 
       errorMsg = (this.props.errors[attribute]).map(function (err, idx) {
         return <span key={idx} className="help-block">{err}</span>;

@@ -1,6 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Icon from './icon.js';
 
 import wrapComponent from '../hoc/panel';
 
