@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Icon from '../../components/icon';
+import { paginationBoundaries } from './order-utils';
 
 export class PaginationWrapper extends React.Component {
   render() {
@@ -67,5 +68,13 @@ export class ListBody extends React.Component {
   render() {
     const { children} = this.props;
     return <tbody>{children}</tbody>;
+  }
+}
+
+export class RecordInfo extends React.Component {
+  render() {
+    const { nPerPage, idx, n } = this.props;
+    const { start, end } = paginationBoundaries(idx, nPerPage);
+    return <p className="pull-right">Showing {start + 1} to {(Number(start) + Number(nPerPage)) > n ? n : end} of {n} entries</p>
   }
 }

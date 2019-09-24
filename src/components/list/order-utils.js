@@ -1,3 +1,7 @@
+import NexysUtil from '@nexys/utils';
+const { get } = NexysUtil.ds;
+
+
 export const order = (data, sortAttribute, sortDescAsc) => {
   if (!sortAttribute) {
     return data;
@@ -26,9 +30,15 @@ export const order = (data, sortAttribute, sortDescAsc) => {
   return ordered;
 }
 
-export const orderWithPagination = (data, idx, nPerPage) => {
+export const paginationBoundaries = (idx, nPerPage) => {
   const start = (idx - 1) * nPerPage;
   const end = (idx) * nPerPage;
+
+  return { start, end };
+}
+
+export const orderWithPagination = (data, idx, nPerPage) => {
+  const { start, end } = paginationBoundaries(idx, nPerPage);
 
   return data.slice(start, end);
 }

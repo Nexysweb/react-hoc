@@ -2,8 +2,10 @@ import React from 'react';
 
 import NexysUtil from '@nexys/utils';
 
-import { PaginationUnit, PaginationWrapper, ColCell, HeaderUnit, OrderController, ListWrapper, ListContainer, ListHeader, ListBody } from './ui';
+import { PaginationUnit, PaginationWrapper, ColCell, HeaderUnit, OrderController, ListWrapper, ListContainer, ListHeader, ListBody, RecordInfo } from './ui';
 import { getPagination, getPageTiles } from './pagination-utils';
+
+import { order, orderWithPagination } from './order-utils';
 
 const { get } = NexysUtil.ds;
 
@@ -31,7 +33,7 @@ export default class Table extends React.Component {
   }
 
   renderPaginationUnit(k, isActive, idx) {
-    return <PaginationUnit key={idx} isActive={isActive} onClick={x => this.changePage(k)}>{k}</PaginationUnit>; // <li key={k} className="page-item"><button className="page-link" onClick={x => this.changePage(i)}>{k}</button></li>;
+    return <PaginationUnit key={idx} isActive={isActive} onClick={x => this.changePage(k)}>{k}</PaginationUnit>;
   }
 
   renderPagination() {
@@ -57,45 +59,12 @@ export default class Table extends React.Component {
     this.setState({sortDescAsc: descAsc, sortAttribute: name});
   }
 
-  order() {
-    const { data } = this.props;
-    const { sortAttribute, sortDescAsc } = this.state;
-
-    if (!sortAttribute) {
-      return data;
-    }
-
-    // use function in utils
-    const compare = ( a, b, attribute ) => {
-      const ac = get(attribute, a);
-      const bc = get(attribute, b);
-
-      if ( ac < bc ){
-        return -1;
-      }
-      if ( ac > bc ){
-        return 1;
-      }
-      return 0;
-    }
-
-    const ordered = data.sort((a, b) => compare(a, b, sortAttribute));
-
-    if (sortDescAsc === false) {
-      return ordered.reverse();
-    }
-
-    return ordered;
-  }
-
   orderWithPagination = () => {
-    const { pagination } = this.state;
+    const { data } = this.props;
+    const { sortAttribute, sortDescAsc, pagination } = this.state;
     const { idx, nPerPage } = pagination;
 
-    const start = (idx - 1) * nPerPage;
-    const end = (idx) * nPerPage;
-
-    return this.order().slice(start, end);
+    return orderWithPagination(order(data, sortAttribute, sortDescAsc), idx, nPerPage);
   }
 
   changePage = idx => {
@@ -117,7 +86,14 @@ export default class Table extends React.Component {
     });
   }
 
+  renderRecordInfo = (idx, nPerPage) => {
+
+  }
+
   render() {
+    const {pagination, n} = this.state
+    const { idx, nPerPage } = pagination;
+
     return (<ListWrapper><ListContainer>
       <ListHeader>
         {this.renderHeaders()}
@@ -126,6 +102,8 @@ export default class Table extends React.Component {
         {this.renderBody()}
       </ListBody>
     </ListContainer>
+    
+    <RecordInfo n={n} idx={idx} nPerPage={nPerPage}/>
     {this.renderPagination()}
     </ListWrapper>);
   }
