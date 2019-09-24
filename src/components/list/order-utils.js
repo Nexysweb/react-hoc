@@ -1,6 +1,16 @@
 import NexysUtil from '@nexys/utils';
 const { get } = NexysUtil.ds;
 
+const getAttribute = (attribute, a) => {
+  const ac = get(attribute, a);
+
+  if (typeof ac === 'string') {
+    return toLocaleLowerCase(ac);
+  }
+
+  return ac;
+}
+
 
 export const order = (data, sortAttribute, sortDescAsc) => {
   if (!sortAttribute) {
@@ -9,8 +19,8 @@ export const order = (data, sortAttribute, sortDescAsc) => {
 
   // use function in utils
   const compare = ( a, b, attribute ) => {
-    const ac = get(attribute, a);
-    const bc = get(attribute, b);
+    const ac = getAttribute(attribute, a);
+    const bc = getAttribute(attribute, b);
 
     if ( ac < bc ){
       return -1;
