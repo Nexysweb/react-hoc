@@ -9,8 +9,6 @@ const data = [
   {name: 'Grizzly', location: 'America', country: {name: 'Canada'}},
   {name: 'Antelope', location: 'Africa', country: {name: 'Namibia'}}];
 
-
-
 test('filter 1', () => {
   const filters = {name: 'el'};
   const fData = [

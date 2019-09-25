@@ -1,5 +1,5 @@
 import NexysUtil from '@nexys/utils';
-const { get, set } = NexysUtil.ds;
+const { get } = NexysUtil.ds;
 
 export const applyFilter = (data, filters) => {
   const filterArray = Object.keys(filters).map(f => {

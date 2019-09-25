@@ -12,22 +12,17 @@ import Icon from '../../components/icon';
 import Input from '../../form/input';
 import InputAppend from '../../form/input-append';
 
-const { get, set } = NexysUtil.ds;
+const { get } = NexysUtil.ds;
 
 export default class Table extends React.Component {
   constructor(props) {
     super(props);
 
-    const n = props.data.length;
-
-    const filters = {};
-
     this.state = {
-      n,
       sortAttribute: null,
       sortDescAsc: true,
-      pagination: getPagination(n, props.nPerPage),
-      filters
+      filters: {},
+      pageIdx: 1
     }
   }
 
@@ -44,12 +39,12 @@ export default class Table extends React.Component {
   setFilter = (v) => {
     const { filters } = this.state;
 
-    // set(v.name, v.value, filters);
-
     filters[v.name] = v.value;
-    console.log(filters);
 
-    this.setState({filters});
+    // when a filter is applied, the page index is reset
+    const pageIdx = 1;
+
+    this.setState({filters, pageIdx});
   }
 
   renderFilters() {
@@ -63,9 +58,8 @@ export default class Table extends React.Component {
     return <PaginationUnit key={idx} isActive={isActive} onClick={x => this.changePage(k)}>{k}</PaginationUnit>;
   }
 
-  renderPagination() {
-    const { pagination } = this.state;
-    const { idx, nPage } = pagination;
+  renderPagination(pagination, idx) {
+    const { nPage } = pagination;
 
     const units = getPageTiles(idx, nPage).map((i) => {
       if ( i < 0 ) {
@@ -97,30 +91,14 @@ export default class Table extends React.Component {
     this.setState({sortDescAsc: descAsc, sortAttribute: name});
   }
 
-  orderWithPagination = () => {
-    const { data } = this.props;
-    const { sortAttribute, sortDescAsc, pagination, filters } = this.state;
-    const { idx, nPerPage } = pagination;
-
-    const fData = applyFilter(data, filters);
-
-    const n = fData.length;
-    // this.setState({n});
-
-    return orderWithPagination(order(fData, sortAttribute, sortDescAsc), idx, nPerPage);
+  changePage = pageIdx => {
+    this.setState({pageIdx});
   }
 
-  changePage = idx => {
-    const { pagination } = this.state;
-    pagination.idx = idx;
-
-    this.setState({pagination});
-  }
-
-  renderBody() {
+  renderBody(data) {
     const { def } = this.props;
     
-    return this.orderWithPagination().map((row, i) => {
+    return data.map((row, i) => {
       return (<tr key={i}>
         {def.map((h, j) => {
           return <ColCell key={j}>{h.render ? h.render(row) : get(h.name, row)}</ColCell>
@@ -130,8 +108,17 @@ export default class Table extends React.Component {
   }
 
   render() {
-    const {pagination, n} = this.state
-    const { idx, nPerPage } = pagination;
+    const { data } = this.props;
+    const { filters, pageIdx } = this.state;
+    const fData = applyFilter(data, filters);
+
+    const nPerPage = this.props.nPerPage;
+    const n = fData.length;
+    const pagination = getPagination(n, nPerPage);
+
+    const { sortAttribute, sortDescAsc } = this.state;
+
+    const pData = orderWithPagination(order(fData, sortAttribute, sortDescAsc), pageIdx, nPerPage);
 
     return (<ListWrapper><ListContainer>
       <ListHeader>
@@ -143,12 +130,12 @@ export default class Table extends React.Component {
         </HeaderRow>
       </ListHeader>
       <ListBody>
-        {this.renderBody()}
+        {this.renderBody(pData)}
       </ListBody>
     </ListContainer>
     
-    <RecordInfo n={n} idx={idx} nPerPage={nPerPage}/>
-    {this.renderPagination()}
+    <RecordInfo n={n} idx={pageIdx} nPerPage={nPerPage}/>
+    {this.renderPagination(pagination, pageIdx)}
     </ListWrapper>);
   }
 }
