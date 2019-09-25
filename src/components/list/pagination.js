@@ -12,7 +12,13 @@ class Unit extends React.Component {
 
 export default class Pagination extends React.Component {
   render() {
-    const {pagination, idx} = this.props
+    const {n, nPerPage, idx} = this.props;
+
+    if (n === 0) {
+      return null;
+    }
+
+    const pagination = getPagination(n, nPerPage)
     const { nPage } = pagination;
 
     const units = getPageTiles(idx, nPage).map((i) => {

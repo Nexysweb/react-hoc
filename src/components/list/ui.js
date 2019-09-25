@@ -1,7 +1,18 @@
 import React from 'react';
 
 import Icon from '../../components/icon';
+import Alert from '../../components/alert';
 import { paginationBoundaries } from './order-utils';
+
+export class NoRow extends React.Component {
+  render() {
+    if (this.props.n > 0) {
+      return null;
+    }
+
+    return <Alert type="warning">No rows found</Alert>;
+  }
+}
 
 export class PaginationWrapper extends React.Component {
   render() {
@@ -87,6 +98,11 @@ export class ListBody extends React.Component {
 export class RecordInfo extends React.Component {
   render() {
     const { nPerPage, idx, n } = this.props;
+
+    if (n === 0) {
+      return null;
+    }
+
     const { start, end } = paginationBoundaries(idx, nPerPage);
     return <p className="pull-right">Showing {start + 1} to {(Number(start) + Number(nPerPage)) > n ? n : end} of {n} entries</p>
   }

@@ -2,9 +2,8 @@ import React from 'react';
 
 import NexysUtil from '@nexys/utils';
 
-import { ColCell, HeaderUnit, Row, OrderController, ListWrapper, ListContainer, ListHeader, ListBody, RecordInfo } from './ui';
+import { NoRow, ColCell, HeaderUnit, Row, OrderController, ListWrapper, ListContainer, ListHeader, ListBody, RecordInfo } from './ui';
 import { SearchUnit } from './form';
-import { getPagination } from './pagination-utils';
 
 import { order, orderWithPagination } from './order-utils';
 import { applyFilter } from './filter-utils';
@@ -111,10 +110,9 @@ export default class List extends ListSuper {
   render() {
     const { data, nPerPage } = this.props;
     const { filters, pageIdx, sortAttribute, sortDescAsc } = this.state;
+    
     const fData = applyFilter(data, filters);
-
     const n = fData.length;
-    const pagination = getPagination(n, nPerPage);
 
     const pData = orderWithPagination(order(fData, sortAttribute, sortDescAsc), pageIdx, nPerPage);
 
@@ -135,7 +133,9 @@ export default class List extends ListSuper {
       </ListContainer>
     
       <RecordInfo n={n} idx={pageIdx} nPerPage={nPerPage}/>
-      <Pagination pagination={pagination} idx={pageIdx} onClick={v => this.changePage(v)}/>
+      <Pagination n={n} nPerPage={nPerPage} idx={pageIdx} onClick={v => this.changePage(v)}/>
+
+      <NoRow n={n}/>
     </ListWrapper>);
   }
 }
