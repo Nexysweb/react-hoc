@@ -3,12 +3,6 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-// import { linkTo } from '@storybook/addon-links';
-
-//import { Button } from '@storybook/react/demo';
-
-import Icon from '../components/icon'
-
 import Input from '../form/input';
 import InputNumber from '../form/number-input';
 import MyBoolean from '../form/boolean';
@@ -19,24 +13,6 @@ import Typeahead from '../form/typeahead';
 import Datepicker from '../form/date';
 import Textarea from '../form/textarea';
 import Wrapper from '../form/wrapper';
-import Panel from '../components/panel';
-
-import List from '../components/list'
-
-const data = [
-  {name: 'Sheep', location: 'Europe'},
-  {name: 'Tiger', location: 'Asia'},
-  {name: 'Elephant', location: 'Africa'},
-  {name: 'Lion', location: 'Africa'},
-  {name: 'Cat', location: 'Europe'},
-  {name: 'Grizzly', location: 'America'},
-  {name: 'Antelope', location: 'Africa'}];
-
-const def = [{name: 'name'}, {name: 'location'}, {name: 'location'}, {name: 'location'}, {name: 'location'}, {name: 'location'}, {name: 'name'}]
-
-storiesOf('Components', module)
-  .add('icon', () => <Icon name="home"/>)
-  .add('list', () => <List data={data} def={def} nPerPage="3"/>)
 
 const options = [
   {id: 1, name: 'apple'},
@@ -65,4 +41,4 @@ storiesOf('Form', module)
   .add('typeahead', () => <Layout><Typeahead name="mytypeahead" options={options} onChange={action('clicked')}/></Layout>)
   .add('textarea', () => <Layout><Textarea name="mytextarea" onChange={action('clicked')}/></Layout>)
   .add('wrapper', () => <Layout><br/><Wrapper mandatory  label="sdf" info="my info" name="mywrapper">inside of wrapper</Wrapper></Layout>)
-  .add('panel', () => <Layout><Panel title="Panel title">Panel with custom header</Panel></Layout>)
+

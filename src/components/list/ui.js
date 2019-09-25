@@ -34,12 +34,18 @@ export class HeaderUnit extends React.Component {
   }
 }
 
-export class OrderController extends React.Component {
+export class OrderControllerUpAndDown extends React.Component {
   render() {
     return (<span>
       <span key={"asc"} onClick={_ => this.props.onClick(true)}><Icon name="caret-up"/></span>
       <span key={"desc"} onClick={_ => this.props.onClick(false)}><Icon name="caret-down"/></span>
     </span>);
+  }
+}
+
+export class OrderController extends React.Component {
+  render() {
+    return (<span onClick={_ => this.props.onClick(null)}><Icon name="sort"/></span>);
   }
 } 
 
@@ -57,10 +63,17 @@ export class ListContainer extends React.Component {
   }
 }
 
+export class HeaderRow extends React.Component {
+  render() {
+    const { children} = this.props;
+    return <tr>{children}</tr>;
+  }
+}
+
 export class ListHeader extends React.Component {
   render() {
     const { children} = this.props;
-    return <thead><tr>{children}</tr></thead>;
+    return <thead>{children}</thead>;
   }
 }
 

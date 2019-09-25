@@ -2,12 +2,17 @@ import React from 'react';
 
 import NexysUtil from '@nexys/utils';
 
-import { PaginationUnit, PaginationWrapper, ColCell, HeaderUnit, OrderController, ListWrapper, ListContainer, ListHeader, ListBody, RecordInfo } from './ui';
+import { PaginationUnit, PaginationWrapper, ColCell, HeaderUnit, HeaderRow, OrderController, ListWrapper, ListContainer, ListHeader, ListBody, RecordInfo } from './ui';
 import { getPagination, getPageTiles } from './pagination-utils';
 
 import { order, orderWithPagination } from './order-utils';
+import { applyFilter } from './filter-utils';
 
-const { get } = NexysUtil.ds;
+import Icon from '../../components/icon';
+import Input from '../../form/input';
+import InputAppend from '../../form/input-append';
+
+const { get, set } = NexysUtil.ds;
 
 export default class Table extends React.Component {
   constructor(props) {
@@ -15,20 +20,42 @@ export default class Table extends React.Component {
 
     const n = props.data.length;
 
+    const filters = {};
+
     this.state = {
       n,
       sortAttribute: null,
       sortDescAsc: true,
-      pagination: getPagination(n, props.nPerPage)
+      pagination: getPagination(n, props.nPerPage),
+      filters
     }
   }
 
   renderHeaders() {
     return this.props.def.map((h, i) => {
       const label = h.label || h.name;
-      const order = label ? <OrderController onClick={descAsc => this.setOrder(h.name, descAsc)}/> : null;
+      //const order = label ? <OrderControllerUpAndDown onClick={descAsc => this.setOrder(h.name)}/> : null;
+      const order = label ? <OrderController onClick={descAsc => this.setOrder(h.name)}/> : null;
 
       return <HeaderUnit key={i}>{label} {order}</HeaderUnit>;
+    })
+  }
+
+  setFilter = (v) => {
+    const { filters } = this.state;
+
+    // set(v.name, v.value, filters);
+
+    filters[v.name] = v.value;
+    console.log(filters);
+
+    this.setState({filters});
+  }
+
+  renderFilters() {
+    const { filters } = this.state;
+    return this.props.def.map((h, i) => {
+      return <HeaderUnit key={i}><div className="input-group"><Input name={h.name} value={filters[h.name]} onChange={v => this.setFilter(v)}/><InputAppend><Icon name="search"/></InputAppend></div></HeaderUnit>;
     })
   }
 
@@ -55,16 +82,32 @@ export default class Table extends React.Component {
     </PaginationWrapper>)
   }
 
-  setOrder = (name, descAsc) => {
+  /**
+   * defines order to apply
+   * @param  {[type]} name    attribute/column
+   * @param  {[type]} descAsc true/false - asc or desc. if null, will toggle
+   * @return {[type]}         [description]
+   */
+  setOrder = (name, descAsc = null) => {
+    if (descAsc === null) {
+      const { sortDescAsc } = this.state;
+      descAsc = !sortDescAsc;
+    }
+
     this.setState({sortDescAsc: descAsc, sortAttribute: name});
   }
 
   orderWithPagination = () => {
     const { data } = this.props;
-    const { sortAttribute, sortDescAsc, pagination } = this.state;
+    const { sortAttribute, sortDescAsc, pagination, filters } = this.state;
     const { idx, nPerPage } = pagination;
 
-    return orderWithPagination(order(data, sortAttribute, sortDescAsc), idx, nPerPage);
+    const fData = applyFilter(data, filters);
+
+    const n = fData.length;
+    // this.setState({n});
+
+    return orderWithPagination(order(fData, sortAttribute, sortDescAsc), idx, nPerPage);
   }
 
   changePage = idx => {
@@ -92,7 +135,12 @@ export default class Table extends React.Component {
 
     return (<ListWrapper><ListContainer>
       <ListHeader>
-        {this.renderHeaders()}
+        <HeaderRow>
+          {this.renderHeaders()}
+        </HeaderRow>
+        <HeaderRow>
+          {this.renderFilters()}
+        </HeaderRow>
       </ListHeader>
       <ListBody>
         {this.renderBody()}
