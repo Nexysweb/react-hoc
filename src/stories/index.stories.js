@@ -10,18 +10,19 @@ import Nav from '../components/nav'
 import List from '../components/list'
 
 const data = [
-  {name: 'Sheep', location: 'Europe', country: {name: 'United Kingdom'}},
-  {name: 'Tiger', location: 'Asia', country: {name: 'India'}},
-  {name: 'Elephant', location: 'Africa', country: {name: 'Tanzania'}},
-  {name: 'Lion', location: 'Africa', country: {name: 'South Africa'}},
-  {name: 'Cat', location: 'Europe', country: {name: 'Germany'}},
-  {name: 'Grizzly', location: 'America', country: {name: 'Canada'}},
-  {name: 'Antelope', location: 'Africa', country: {name: 'Namibia'}}];
+  {name: 'Sheep', location: 'Europe', country: {name: 'United Kingdom'}, amount: 23},
+  {name: 'Tiger', location: 'Asia', country: {name: 'India'}, amount: 43},
+  {name: 'Elephant', location: 'Africa', country: {name: 'Tanzania'}, amount: 3},
+  {name: 'Lion', location: 'Africa', country: {name: 'South Africa'}, amount: 2},
+  {name: 'Cat', location: 'Europe', country: {name: 'Germany'}, amount: 7},
+  {name: 'Grizzly', location: 'America', country: {name: 'Canada'}, amount: 43},
+  {name: 'Antelope', location: 'Africa', country: {name: 'Namibia'}, amount: 87}];
 
 const def = [
   {name: 'name'},
   {name: 'location'},
-  {name: 'country.name', label: 'Country'}
+  {name: 'country.name', label: 'Country'},
+  {name: 'amount', label: 'A long label'}
 ];
 
 const nav = [{name: 'Name', link: '/sdf/sdf'}]

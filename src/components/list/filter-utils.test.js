@@ -1,4 +1,28 @@
-import { applyFilter } from './filter-utils';
+import { applyFilter, compare, compareString, searchInObject } from './filter-utils';
+
+test('compareString', () => {
+  const main = 'fullString';
+
+  expect(compareString(main, 'ulls')).toEqual(true);
+  expect(compareString(main, 'uls')).toEqual(false);
+
+});
+
+test('searchInObject', () => {
+  const obj = {
+    animal: 'lion',
+    name: 'john'
+  }
+
+  expect(searchInObject('lio', obj)).toEqual(true);
+  expect(searchInObject('ohn', obj)).toEqual(true);
+  expect(searchInObject('kohn', obj)).toEqual(false);
+});
+
+test('compare', () => {
+  expect(compare(345, "345")).toEqual(true);
+  expect(compare(345, "346")).toEqual(false);
+})
 
 const data = [
   {name: 'Sheep', location: 'Europe', country: {name: 'United Kingdom'}},

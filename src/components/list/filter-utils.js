@@ -1,6 +1,28 @@
 import NexysUtil from '@nexys/utils';
 const { get } = NexysUtil.ds;
 
+export const compare = (main, searchString) => {
+  const searchType = typeof main;
+
+  switch (searchType) {
+    case 'string':
+      return compareString(main, searchString);
+    case 'number':
+      return main === Number(searchString);
+    default:
+      return false;
+  }
+}
+
+export const compareString = (main, searchString) => main.toLowerCase().indexOf(searchString.toLowerCase()) > -1;
+
+export const searchInObject = (searchString, object) => Object.keys(object).map(o => {
+    const main = object[o];
+
+    return compare(main, searchString);
+  })
+  .reduce((a, b) => a || b);
+
 export const applyFilter = (data, filters) => {
   const filterArray = Object.keys(filters).map(f => {
     return {name: f, value: filters[f]}
@@ -12,13 +34,19 @@ export const applyFilter = (data, filters) => {
 
   return data.filter(d => {
     return filterArray.map(f => {
-      const searchString = get(f.name, d);
+      const searchString = f.value;
+      const key = f.name;
+      const main = get(key, d);
 
-      if (searchString === null) {
+      if (key === 'globalSearch') {
+        return searchInObject(searchString, d)
+      }
+
+      if (main === null) {
         return true;
       }
 
-      return searchString.toLowerCase().indexOf(f.value.toLowerCase()) > -1;
+      return compare(main, searchString);
     })
     .reduce((a, b) => a && b);
   });

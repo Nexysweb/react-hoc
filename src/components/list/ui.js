@@ -63,7 +63,7 @@ export class ListContainer extends React.Component {
   }
 }
 
-export class HeaderRow extends React.Component {
+export class Row extends React.Component {
   render() {
     const { children} = this.props;
     return <tr>{children}</tr>;

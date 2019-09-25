@@ -2,19 +2,18 @@ import React from 'react';
 
 import NexysUtil from '@nexys/utils';
 
-import { PaginationUnit, PaginationWrapper, ColCell, HeaderUnit, HeaderRow, OrderController, ListWrapper, ListContainer, ListHeader, ListBody, RecordInfo } from './ui';
-import { getPagination, getPageTiles } from './pagination-utils';
+import { ColCell, HeaderUnit, Row, OrderController, ListWrapper, ListContainer, ListHeader, ListBody, RecordInfo } from './ui';
+import { SearchUnit } from './form';
+import { getPagination } from './pagination-utils';
 
 import { order, orderWithPagination } from './order-utils';
 import { applyFilter } from './filter-utils';
 
-import Icon from '../../components/icon';
-import Input from '../../form/input';
-import InputAppend from '../../form/input-append';
+import Pagination from './pagination';
 
 const { get } = NexysUtil.ds;
 
-export default class Table extends React.Component {
+class ListSuper extends React.Component {
   constructor(props) {
     super(props);
 
@@ -39,7 +38,12 @@ export default class Table extends React.Component {
   setFilter = (v) => {
     const { filters } = this.state;
 
-    filters[v.name] = v.value;
+    if (v.value === '') {
+      //filters.filter(x => x.name !== )
+      delete(filters[v.name]);
+    } else {
+      filters[v.name] = v.value === '' ? null : v.value;
+    }
 
     // when a filter is applied, the page index is reset
     const pageIdx = 1;
@@ -50,31 +54,13 @@ export default class Table extends React.Component {
   renderFilters() {
     const { filters } = this.state;
     return this.props.def.map((h, i) => {
-      return <HeaderUnit key={i}><div className="input-group"><Input name={h.name} value={filters[h.name]} onChange={v => this.setFilter(v)}/><InputAppend><Icon name="search"/></InputAppend></div></HeaderUnit>;
+      return (<HeaderUnit key={i}>
+        <SearchUnit name={h.name} value={filters[h.name]} onChange={v => this.setFilter(v)}/>
+      </HeaderUnit>);
     })
   }
 
-  renderPaginationUnit(k, isActive, idx) {
-    return <PaginationUnit key={idx} isActive={isActive} onClick={x => this.changePage(k)}>{k}</PaginationUnit>;
-  }
 
-  renderPagination(pagination, idx) {
-    const { nPage } = pagination;
-
-    const units = getPageTiles(idx, nPage).map((i) => {
-      if ( i < 0 ) {
-        return <PaginationUnit key={i} isDisabled={true}>...</PaginationUnit>;
-      }
-
-      return this.renderPaginationUnit(i, i === idx, i);
-    });
-
-    return (<PaginationWrapper>
-      <PaginationUnit isDisabled={idx === 1} onClick={x => this.changePage(idx - 1)}>&laquo;</PaginationUnit>
-      {units}
-      <PaginationUnit isDisabled={idx === nPage} onClick={x => this.changePage(idx + 1)}>&raquo;</PaginationUnit>
-    </PaginationWrapper>)
-  }
 
   /**
    * defines order to apply
@@ -108,34 +94,50 @@ export default class Table extends React.Component {
   }
 
   render() {
-    const { data } = this.props;
-    const { filters, pageIdx } = this.state;
+    return null;
+  }
+}
+
+class GlobalSearch extends React.Component {
+  render() {
+    const { onChange, filters } = this.props;
+    const key = "globalSearch";
+    const value = filters[key];
+    return <div className="pull-right"><SearchUnit onChange={v => onChange(v)} name={key} value={value}/></div>
+  }
+}
+
+export default class List extends ListSuper {
+  render() {
+    const { data, nPerPage } = this.props;
+    const { filters, pageIdx, sortAttribute, sortDescAsc } = this.state;
     const fData = applyFilter(data, filters);
 
-    const nPerPage = this.props.nPerPage;
     const n = fData.length;
     const pagination = getPagination(n, nPerPage);
 
-    const { sortAttribute, sortDescAsc } = this.state;
-
     const pData = orderWithPagination(order(fData, sortAttribute, sortDescAsc), pageIdx, nPerPage);
 
-    return (<ListWrapper><ListContainer>
-      <ListHeader>
-        <HeaderRow>
-          {this.renderHeaders()}
-        </HeaderRow>
-        <HeaderRow>
-          {this.renderFilters()}
-        </HeaderRow>
-      </ListHeader>
-      <ListBody>
-        {this.renderBody(pData)}
-      </ListBody>
-    </ListContainer>
+    return (<ListWrapper>
+      <GlobalSearch onChange={v => this.setFilter(v)} filters={filters}/>
+      <ListContainer>
+        <ListHeader>
+          <Row>
+            {this.renderHeaders()}
+          </Row>
+          <Row>
+            {this.renderFilters()}
+          </Row>
+        </ListHeader>
+        <ListBody>
+          {this.renderBody(pData)}
+        </ListBody>
+      </ListContainer>
     
-    <RecordInfo n={n} idx={pageIdx} nPerPage={nPerPage}/>
-    {this.renderPagination(pagination, pageIdx)}
+      <RecordInfo n={n} idx={pageIdx} nPerPage={nPerPage}/>
+      <Pagination pagination={pagination} idx={pageIdx} onClick={v => this.changePage(v)}/>
     </ListWrapper>);
   }
 }
+
+
