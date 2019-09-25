@@ -5,7 +5,7 @@ export default class Alert extends React.Component {
     const { type, children } = this.props;
     const className = 'alert alert-' + type;
 
-    return (<div class={className} role="alert">
+    return (<div className={className} role="alert">
       {children}
     </div>);
   }

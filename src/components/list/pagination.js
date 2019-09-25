@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PaginationUnit, PaginationWrapper, ColCell, HeaderUnit, Row, OrderController, ListWrapper, ListContainer, ListHeader, ListBody, RecordInfo } from './ui';
+import { PaginationUnit, PaginationWrapper } from './ui';
 import { getPagination, getPageTiles } from './pagination-utils';
 
 class Unit extends React.Component {
