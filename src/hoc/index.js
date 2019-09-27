@@ -10,6 +10,7 @@ import Select2 from './select2';
 import Textarea from './textarea';
 import Wrapper from './wrapper';
 import FormChange from './form-change';
+import File from './file';
 
 import List from '../components/list';
 
@@ -26,5 +27,6 @@ export default {
   Textarea, 
   Wrapper,
   FormChange,
+  File,
   List
 };

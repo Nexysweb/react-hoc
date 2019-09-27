@@ -26,7 +26,8 @@ class ListSuper extends React.Component {
 
   renderHeaders() {
     return this.props.def.map((h, i) => {
-      const label = h.label || h.name;
+      const label = h.label === null ? null : h.label || h.name;
+
       //const order = label ? <OrderControllerUpAndDown onClick={descAsc => this.setOrder(h.name)}/> : null;
       const order = label ? <OrderController onClick={descAsc => this.setOrder(h.name)}/> : null;
 
@@ -53,13 +54,15 @@ class ListSuper extends React.Component {
   renderFilters() {
     const { filters } = this.state;
     return this.props.def.map((h, i) => {
+      if (!h.filter) {
+        return null;
+      }
+
       return (<HeaderUnit key={i}>
         <SearchUnit name={h.name} value={filters[h.name]} onChange={v => this.setFilter(v)}/>
       </HeaderUnit>);
     })
   }
-
-
 
   /**
    * defines order to apply
@@ -99,16 +102,28 @@ class ListSuper extends React.Component {
 
 class GlobalSearch extends React.Component {
   render() {
-    const { onChange, filters } = this.props;
+    const { onChange, filters, config } = this.props;
+
+    if (!config.search) {
+      return null;
+    }
+
     const key = "globalSearch";
     const value = filters[key];
-    return <div className="pull-right"><SearchUnit onChange={v => onChange(v)} name={key} value={value}/></div>
+    return <div className="pull-right"><SearchUnit onChange={v => onChange(v)} name={key} value={value}/></div>;
   }
 }
 
 export default class List extends ListSuper {
+  componentDidUpdate(p) {
+    console.log(p)
+    console.log(this.props);
+
+    this.render();
+  }
+
   render() {
-    const { data, nPerPage } = this.props;
+    const { data, nPerPage = 5, options, config = {} } = this.props;
     const { filters, pageIdx, sortAttribute, sortDescAsc } = this.state;
     
     const fData = applyFilter(data, filters);
@@ -117,7 +132,7 @@ export default class List extends ListSuper {
     const pData = orderWithPagination(order(fData, sortAttribute, sortDescAsc), pageIdx, nPerPage);
 
     return (<ListWrapper>
-      <GlobalSearch onChange={v => this.setFilter(v)} filters={filters}/>
+      <GlobalSearch config={config} onChange={v => this.setFilter(v)} filters={filters}/>
       <ListContainer>
         <ListHeader>
           <Row>
