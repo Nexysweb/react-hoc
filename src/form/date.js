@@ -17,9 +17,6 @@ class MyDate extends React.Component {
       inline: this.props.inline
     };
 
-    console.log(options)
-    console.log('s')
-
     // since flatpickr doesn't understant string format need to change the value for it
     const value = this.props.value ? new Date(this.props.value) : this.props.value;
 
