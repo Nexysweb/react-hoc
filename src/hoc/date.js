@@ -10,6 +10,8 @@ import Utils from '@nexys/utils';
 
 import Config from '../config';
 
+console.log(Utils.date.format)
+
 const getDateFormat = (dateFormatProps, enableTimeProps) => {
   const dateFormatString =  Config.format.date;
   const datetimeFormatString = Config.format.datetime;
@@ -68,7 +70,7 @@ const wrapComponent = () => WrappedComponent => class Hoc extends React.Componen
 
   componentWillReceiveProps(nextProps) {
     if (typeof nextProps.value !== 'undefined') {
-      const format = nextProps.dateFormat ? nextProps.dateFormat : nextProps.enableTime ? Utils.format.dateTime : Utils.format.date;
+      const format = getDateFormat(nextProps.dateFormat, nextProps.enableTime);
       this.setState({value: nextProps.value, dateFormat: format});
     }
   }
