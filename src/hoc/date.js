@@ -76,8 +76,6 @@ const wrapComponent = () => WrappedComponent => class Hoc extends React.Componen
   }
 
   render() {
-
-
     // since flatpickr doesn't understant string format need to change the value for it
     const value = this.state.value ? new Date(this.state.value) : this.state.value;
 
