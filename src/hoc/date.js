@@ -10,8 +10,6 @@ import Utils from '@nexys/utils';
 
 import Config from '../config';
 
-console.log(Utils.date.format)
-
 const getDateFormat = (dateFormatProps, enableTimeProps) => {
   const dateFormatString =  Config.format.date;
   const datetimeFormatString = Config.format.datetime;
