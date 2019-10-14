@@ -87,7 +87,14 @@ const wrapComponent = () => WrappedComponent => class Hoc extends React.Componen
     }
   }
 
-  componentDidUpdate(nextProps) {
+  // props and state collision
+  // componentDidUpdate(nextProps) {
+  //   if (nextProps.value !== this.props.value) {
+  //     this.processProps(nextProps);
+  //   }
+  // }
+
+  componentWillReceiveProps(nextProps) {
     if (nextProps.value !== this.props.value) {
       this.processProps(nextProps);
     }
