@@ -63,6 +63,10 @@ const wrapComponent = () => WrappedComponent => class Hoc extends React.Componen
 
       // calls parent function
       this.props.onChange({name, value});
+    } else {
+      // value is deleted
+      this.setState({value: null});
+      this.props.onChange({name: this.state.name, value: null});
     }
   }
 
