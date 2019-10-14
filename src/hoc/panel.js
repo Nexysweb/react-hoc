@@ -25,7 +25,7 @@ const wrapComponent = () => WrappedComponent => class Hoc extends React.Componen
   }
 
   render() {
-    return <WrappedComponent title={this.props.title}>{this.props.children}</WrappedComponent>;
+    return <WrappedComponent title={this.props.title} header={this.props.header}>{this.props.children}</WrappedComponent>;
   }
 }
 
