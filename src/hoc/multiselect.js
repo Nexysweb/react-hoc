@@ -38,7 +38,6 @@ const wrapComponent = () => WrappedComponent => class Hoc extends React.Componen
   }
 
   handleChange = (v) => {
-    console.log(v);
     let selected = [];
     if (v.length > 0) {
       selected = v.map(x => x.value);
@@ -51,7 +50,6 @@ const wrapComponent = () => WrappedComponent => class Hoc extends React.Componen
   }
 
   render() {
-    console.log(this.state.values)
     return (
       <WrappedComponent
         name={this.props.name}

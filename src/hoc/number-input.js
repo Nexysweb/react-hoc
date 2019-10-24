@@ -40,7 +40,7 @@ const wrapComponent = () => WrappedComponent => class Hoc extends React.Componen
 
   static propTypes = {
     name: PropTypes.string.isRequired,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onChange: PropTypes.func.isRequired,
     onBlur: PropTypes.func,
     disabled: PropTypes.bool,

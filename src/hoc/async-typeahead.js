@@ -1,13 +1,8 @@
 import React from 'react';
 
-import Digis from '@nexys/digis-i18n';
-const { Request } = Digis;
-
-const wrapComponent = () => MainComponent => class Hoc extends React.Component {
+const wrapComponent = (requestFetchFunc) => MainComponent => class Hoc extends React.Component {
   constructor(props) {
     super(props);
-
-    console.log(props)
 
     const data = [];
     const value = null;
@@ -19,15 +14,12 @@ const wrapComponent = () => MainComponent => class Hoc extends React.Component {
   search = value => {
     /** possible to pass either a function or a URL for request */
     const {  url } = this.props;
-
-    console.log(this.props)
     if (this.props.onSearch && typeof this.props.onSearch === 'function') {
       this.props.onSearch(value).then(data => {
-        console.log('are we in the promise?')
         this.setState({data})
       });
     } else {
-      Request.get(url).then(data => this.setState({data}));
+      requestFetchFunc.get(url).then(data => this.setState({data}));
     }
   }
 
@@ -58,8 +50,6 @@ const wrapComponent = () => MainComponent => class Hoc extends React.Component {
 
     // makes sense to return entire object
     const value = {name, value: v};
-
-    // this.props.onChange(value);
 
     const { onChange, onSelect } = this.props;
     if (onChange && typeof onChange === 'function') {
