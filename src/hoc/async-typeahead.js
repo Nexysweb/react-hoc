@@ -4,8 +4,6 @@ const wrapComponent = (requestFetchFunc) => MainComponent => class Hoc extends R
   constructor(props) {
     super(props);
 
-    console.log(props)
-
     const data = [];
     const value = null;
     const clear = false;
@@ -16,14 +14,12 @@ const wrapComponent = (requestFetchFunc) => MainComponent => class Hoc extends R
   search = value => {
     /** possible to pass either a function or a URL for request */
     const {  url } = this.props;
-
-    console.log(this.props)
     if (this.props.onSearch && typeof this.props.onSearch === 'function') {
       this.props.onSearch(value).then(data => {
-        console.log('are we in the promise?')
         this.setState({data})
       });
     } else {
+      requestFetchFunc.get(url).then(data => this.setState({data}));
       requestFetchFunc(url).then(data => this.setState({data}));
     }
   }
@@ -55,8 +51,6 @@ const wrapComponent = (requestFetchFunc) => MainComponent => class Hoc extends R
 
     // makes sense to return entire object
     const value = {name, value: v};
-
-    // this.props.onChange(value);
 
     const { onChange, onSelect } = this.props;
     if (onChange && typeof onChange === 'function') {
