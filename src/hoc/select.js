@@ -27,7 +27,7 @@ const wrapComponent = () => WrappedComponent => class Hoc extends React.Componen
     options: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     placeholder: PropTypes.string,
     /** Deprecated. Value must be used */
     defaultValue: PropTypes.string,
