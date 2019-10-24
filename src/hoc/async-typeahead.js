@@ -1,9 +1,6 @@
 import React from 'react';
 
-import Digis from '@nexys/digis-i18n';
-const { Request } = Digis;
-
-const wrapComponent = () => MainComponent => class Hoc extends React.Component {
+const wrapComponent = (requestFetchFunc) => MainComponent => class Hoc extends React.Component {
   constructor(props) {
     super(props);
 
@@ -27,7 +24,7 @@ const wrapComponent = () => MainComponent => class Hoc extends React.Component {
         this.setState({data})
       });
     } else {
-      Request.get(url).then(data => this.setState({data}));
+      requestFetchFunc(url).then(data => this.setState({data}));
     }
   }
 
