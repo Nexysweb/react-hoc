@@ -20,6 +20,7 @@ const wrapComponent = (requestFetchFunc) => MainComponent => class Hoc extends R
       });
     } else {
       requestFetchFunc.get(url).then(data => this.setState({data}));
+      requestFetchFunc(url).then(data => this.setState({data}));
     }
   }
 
