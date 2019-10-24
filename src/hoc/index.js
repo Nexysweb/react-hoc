@@ -13,8 +13,10 @@ import FormChange from './form-change';
 import File from './file';
 
 import List from '../components/list';
+import AsyncTypeahead from './async-typeahead';
 
 export default {
+  AsyncTypeahead,
   Boolean: MyBoolean, 
   Checkbox, 
   Date: MyDate, 
