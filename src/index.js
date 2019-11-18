@@ -1,3 +1,9 @@
-import Hoc from './hoc/index';
+import Hoc from './hoc';
+import Form from './form';
+import Components from './components';
 
-export default Hoc;
+export {
+  Hoc,
+  Form,
+  Components,
+}
