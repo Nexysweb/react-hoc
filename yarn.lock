@@ -1163,10 +1163,10 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@nexys/utils@^3.2.21":
-  version "3.2.21"
-  resolved "https://registry.yarnpkg.com/@nexys/utils/-/utils-3.2.21.tgz#c81267470a24a8e3c9e816d07e6613a94929d353"
-  integrity sha512-v1SqOFdFjs7Vxd0K2LcoyMI/NyL+MwRs/WODYlmHWxb2DQhafUfe+THWpI8oWUkru2LMzOBqwB9r3utlYH1cMA==
+"@nexys/utils@^3.2.22":
+  version "3.2.22"
+  resolved "https://registry.yarnpkg.com/@nexys/utils/-/utils-3.2.22.tgz#8805a7bed71fce71ea3465d5f5ece7c9e3e8fe2e"
+  integrity sha512-qiXTYQulerrcPQFeutN6/9YfL9VQD3eBHbvIeym9DnipIut6hWXPHqXxclR6tSksnn6hZKE5X2EGNKtI8pkuZg==
   dependencies:
     "@babel/runtime" "^7.5.5"
 
