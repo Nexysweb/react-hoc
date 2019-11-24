@@ -9,12 +9,31 @@ import Select from './select';
 import Select2 from './select2';
 import Textarea from './textarea';
 import Wrapper from './wrapper';
-import FormChange from './form-change';
+import FormChange from './form-change-super';
+import FormWrapper from './form-wrapper';
 import File from './file';
 import Toggle from './toggle';
 
 import List from '../components/list';
 import AsyncTypeahead from './async-typeahead';
+
+export {
+  AsyncTypeahead,
+  Checkbox,
+  FormChange,
+  FormWrapper,
+  Input, 
+  Multiselect,
+  NumberInput, 
+  Panel, 
+  Select, 
+  Select2, 
+  Textarea,
+  Toggle,
+  Wrapper,
+  File,
+  List
+};
 
 export default {
   AsyncTypeahead,
@@ -22,6 +41,7 @@ export default {
   Checkbox, 
   Date: MyDate,
   FormChange,
+  FormWrapper,
   Input, 
   Multiselect,
   NumberInput, 

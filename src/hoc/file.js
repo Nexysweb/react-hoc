@@ -21,7 +21,7 @@ export default class FileUpload extends React.Component {
       const file = file[0];
       formData.append(name, file);
 
-      postRequest(url, formData).then(onSuccess, onError);
+      //postRequest(url, formData).then(onSuccess, onError);
     }
   }
 
