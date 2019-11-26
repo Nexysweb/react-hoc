@@ -38,7 +38,7 @@ const wrapComponent = () => WrappedComponent => class Hoc extends React.Componen
   /**
    * in case values are fetched async, the component will update once props change
    */
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const values = nextProps.values || nextProps.options;
     const selected = nextProps.selected || nextProps.value;
     this.setState({values, selected});

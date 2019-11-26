@@ -60,7 +60,7 @@ const wrapComponent = () => WrappedComponent => class Hoc extends React.Componen
     }
   }
 
-  componentWillReceiveProps = (nextProps) => {
+  UNSAFE_componentWillReceiveProps = (nextProps) => {
     if (nextProps.value !== this.props.value) {
       this.processProps(nextProps);
     }

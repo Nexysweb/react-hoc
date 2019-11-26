@@ -70,7 +70,7 @@ const wrapComponent = () => WrappedComponent => class Hoc extends React.Componen
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (typeof nextProps.value !== 'undefined') {
       const format = getDateFormat(nextProps.dateFormat, nextProps.enableTime);
       this.setState({value: nextProps.value, dateFormat: format});
