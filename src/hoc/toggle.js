@@ -27,7 +27,13 @@ const toggleHoc = () => WrappedComponent => class Hoc extends React.Component {
 
     const Content = toggle ? Form : View;
 
-    return <WrappedComponent toggle={toggle} onClick={this.handleToggle}><Content onToggle={this.handleToggle}/></WrappedComponent>;
+    return <WrappedComponent
+      {...props}
+      toggle={toggle}
+      onClick={this.handleToggle}
+      >
+      <Content onToggle={this.handleToggle}/>
+    </WrappedComponent>;
   }
 }
 
