@@ -16,6 +16,7 @@ import Toggle from './toggle';
 
 import List from '../components/list';
 import AsyncTypeahead from './async-typeahead';
+import * as DataLoad from './data-load';
 
 export {
   AsyncTypeahead,
@@ -32,7 +33,8 @@ export {
   Toggle,
   Wrapper,
   File,
-  List
+  List,
+  DataLoad
 };
 
 export default {
