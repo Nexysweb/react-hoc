@@ -36,23 +36,3 @@ export {
   List,
   DataLoad
 };
-
-export default {
-  AsyncTypeahead,
-  Boolean: MyBoolean, 
-  Checkbox, 
-  Date: MyDate,
-  FormChange,
-  FormWrapper,
-  Input, 
-  Multiselect,
-  NumberInput, 
-  Panel, 
-  Select, 
-  Select2, 
-  Textarea,
-  Toggle,
-  Wrapper,
-  File,
-  List
-};
