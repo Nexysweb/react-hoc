@@ -20,7 +20,9 @@ import * as DataLoad from './data-load';
 
 export {
   AsyncTypeahead,
+  Boolean: MyBoolean, 
   Checkbox,
+  Date: MyDate,
   FormChange,
   FormWrapper,
   Input, 
