@@ -71,7 +71,7 @@ Form.propTypes = {
   UI: PropTypes.func.isRequired,
 };
 
-const FormUIPropTypes = {
+export const FormUIPropTypes = {
   data: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
