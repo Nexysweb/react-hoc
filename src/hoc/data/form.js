@@ -40,15 +40,15 @@ const Form = (props) => {
     
     // enters promise
     promise(state.data, props).then(x => {
-      // successful case
-      onUpdate(state.data);
-      onToggle(false)
-      //
       
       const errors = null;
       const isLoading = false;
 
       setState({...state, errors, isLoading});
+      // successful case
+      onUpdate(state.data);
+      onToggle(false)
+      //
     }, errorResult => {
       const { errors } = errorResult;
 
