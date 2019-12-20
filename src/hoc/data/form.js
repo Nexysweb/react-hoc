@@ -41,7 +41,6 @@ const Form = (props) => {
     // enters promise
     promise(state.data, props).then(x => {
       
-      
       const errors = null;
       const isLoading = false;
 
