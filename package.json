@@ -2,7 +2,7 @@
   "name": "@nexys/reactutils",
   "version": "1.5.12",
   "dependencies": {
-    "@nexys/utils": "^3.9.3",
+    "@nexys/utils": "^3.5.15",
     "react-router-dom": "^5.1.0"
   },
   "scripts": {
