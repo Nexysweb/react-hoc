@@ -1,6 +1,6 @@
 {
   "name": "@nexys/reactutils",
-  "version": "1.5.12",
+  "version": "1.5.13",
   "dependencies": {
     "@nexys/utils": "^3.5.15",
     "react-router-dom": "^5.1.0"
